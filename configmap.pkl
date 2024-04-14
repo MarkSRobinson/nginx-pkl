@@ -1,0 +1,15 @@
+amends "chart.pkl"
+
+config {
+  configMaps {
+    ["nginx"] {
+      metadata {
+        //       name = "hello"
+      }
+      data {
+        ["default.conf"] = read("default.conf").text
+      }
+    }
+
+  }
+}

@@ -1,0 +1,19 @@
+amends "chart.pkl"
+
+config {
+  services {
+    ["release-name-"] {
+      spec {
+        type = "ClusterIP"
+        ports {
+          new {
+            port = 80
+            targetPort = "http"
+            protocol = "TCP"
+            name = "http"
+          }
+        }
+      }
+    }
+  }
+}

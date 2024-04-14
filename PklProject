@@ -1,0 +1,14 @@
+amends "pkl:Project"
+
+dependencies {
+  ["k8s"] {
+    uri = "package://pkg.pkl-lang.org/pkl-k8s/k8s@1.0.1"
+  }
+}
+
+package {
+  version = "1.0.1"
+  name = "chart"
+  baseUri = "package://example.com/chart"
+  packageZipUrl = "https://example.com/birds@\(version).zip"
+}

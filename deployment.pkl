@@ -1,0 +1,60 @@
+amends "chart.pkl"
+
+config {
+  deployments {
+    ["nginx"] {
+      spec {
+        replicas = 1
+        template {
+          metadata {
+            labels {
+              ...module.selectorLabels
+            }
+          }
+          spec {
+//             serviceAccountName = ""
+//             securityContext {}
+            containers {
+              new {
+                name = "nginx"
+                image = module.image.repository + ":" + module.image.tag
+                imagePullPolicy = "IfNotPresent"
+                ports {
+                  new {
+                    name = "https"
+                    containerPort = 443
+                    protocol = "TCP"
+                  }
+                }
+                livenessProbe {
+                  httpGet {
+                    path = "/"
+                    scheme = "HTTPS"
+                    port = "https"
+                  }
+                  initialDelaySeconds = 10
+                  periodSeconds = 10
+                }
+                readinessProbe {
+                  httpGet {
+                    path = "/"
+                    scheme = "HTTPS"
+                    port = "https"
+                  }
+                  initialDelaySeconds = 5
+                  periodSeconds = 2
+                }
+              }
+            }
+          }
+
+        }
+        selector {
+          matchLabels {
+            ...module.selectorLabels
+          }
+        }
+      }
+    }
+  }
+}
