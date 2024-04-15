@@ -1,1 +1,19 @@
 amends "chart.pkl"
+
+config {
+  ingresses {
+    ["nginx"] {
+      spec {
+        type = "ClusterIP"
+        ports {
+          new {
+            port = 80
+            targetPort = "http"
+            protocol = "TCP"
+            name = "http"
+          }
+        }
+      }
+    }
+  }
+}

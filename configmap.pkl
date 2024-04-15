@@ -4,7 +4,9 @@ config {
   configMaps {
     ["nginx"] {
       metadata {
-        //       name = "hello"
+        labels {
+          ...module.commonLabels
+        }
       }
       data {
         ["default.conf"] = read("default.conf").text

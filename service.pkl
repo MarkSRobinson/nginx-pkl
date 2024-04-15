@@ -2,7 +2,7 @@ amends "chart.pkl"
 
 config {
   services {
-    ["release-name-"] {
+    ["nginx"] {
       spec {
         type = "ClusterIP"
         ports {

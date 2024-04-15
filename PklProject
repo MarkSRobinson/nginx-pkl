@@ -7,8 +7,8 @@ dependencies {
 }
 
 package {
-  version = "1.0.1"
-  name = "chart"
+  version = "1.0.0"
+  name = "nginx-pkl"
   baseUri = "package://example.com/chart"
   packageZipUrl = "https://example.com/birds@\(version).zip"
 }

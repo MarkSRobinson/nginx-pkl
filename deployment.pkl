@@ -6,14 +6,7 @@ config {
       spec {
         replicas = 1
         template {
-          metadata {
-            labels {
-              ...module.selectorLabels
-            }
-          }
           spec {
-//             serviceAccountName = ""
-//             securityContext {}
             containers {
               new {
                 name = "nginx"

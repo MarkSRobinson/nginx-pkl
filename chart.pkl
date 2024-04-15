@@ -1,22 +1,19 @@
 //amends "PklProject"
-module io.markrobinson.chart
+module io.markrobinson.nginx
 
-import "pkl:reflect"
-import "pkl:Project"
 import "@k8s/K8sObject.pkl"
 import "@k8s/api/apps/v1/Deployment.pkl"
 import "@k8s/api/core/v1/ConfigMap.pkl"
 import "@k8s/api/core/v1/Service.pkl"
 import "@k8s/api/core/v1/ServiceAccount.pkl"
 import "@k8s/api/networking/v1/Ingress.pkl"
-import "@k8s/api/core/v1/LabelSelector.pkl"
 
 import "PklProject"
 import "chart.pkl"
 
 selectorLabels {
-//   ["app.kubernetes.io/name"] = values.name
-  ["app.kubernetes.io/instance"] = "release-name"
+  ["app.kubernetes.io/name"] = "nginx"
+  ["app.kubernetes.io/instance"] = PklProject.package.name
 }
 
 image {
@@ -25,11 +22,12 @@ image {
 }
 
 commonLabels  {
-  ["hello"] = PklProject.package.version
 //   ["helm.sh/chart"] = values.name+"-0.1.0"
-  ["app.kubernetes.io/version"] = "1.16.0"
+  ["app.kubernetes.io/version"] = PklProject.package.version
   ["app.kubernetes.io/managed-by"] = "Helm"
 }
+
+ingressEnabled = false
 
 /// Creates an empty mapping from resource name to resource [type] that defaults `metadata.name` to the resource name.
 function resourceMapping(type): Mapping<String, unknown> =
@@ -81,6 +79,6 @@ local includes: Listing<chart> = new {
   import("service.pkl")
   import("configmap.pkl")
   import("deployment.pkl")
-  import("ingress.pkl")
+  when (ingressEnabled) { import("ingress.pkl") }
   import("serviceaccount.pkl")
 }
