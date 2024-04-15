@@ -1,5 +1,7 @@
 amends "pkl:Project"
 
+import "version.pkl" as v
+
 dependencies {
   ["k8s"] {
     uri = "package://pkg.pkl-lang.org/pkl-k8s/k8s@1.0.1"
@@ -7,8 +9,8 @@ dependencies {
 }
 
 package {
-  version = "1.0.0"
-  name = "nginx-pkl"
+  version = v.version
+  name = v.name
   baseUri = "package://github.com/MarkSRobinson/nginx-pkl/"
   packageZipUrl = "https://github.com/MarkSRobinson/nginx-pkl/releases/download/\(version)/@\(version).zip"
 }

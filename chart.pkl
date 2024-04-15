@@ -8,12 +8,12 @@ import "@k8s/api/core/v1/Service.pkl"
 import "@k8s/api/core/v1/ServiceAccount.pkl"
 import "@k8s/api/networking/v1/Ingress.pkl"
 
-import "PklProject"
+import "version.pkl"
 import "chart.pkl"
 
 selectorLabels {
   ["app.kubernetes.io/name"] = "nginx"
-  ["app.kubernetes.io/instance"] = PklProject.package.name
+  ["app.kubernetes.io/instance"] = version.name
 }
 
 image {
@@ -22,7 +22,7 @@ image {
 }
 
 commonLabels  {
-  ["app.kubernetes.io/version"] = PklProject.package.version
+  ["app.kubernetes.io/version"] = version.version
   ["app.kubernetes.io/managed-by"] = "Helm"
 }
 
