@@ -22,7 +22,6 @@ image {
 }
 
 commonLabels  {
-//   ["helm.sh/chart"] = values.name+"-0.1.0"
   ["app.kubernetes.io/version"] = PklProject.package.version
   ["app.kubernetes.io/managed-by"] = "Helm"
 }
@@ -51,7 +50,6 @@ output {
     }
 
   // Only emit Mappings
-//   value = module.toMap().values.filter( (x) -> (x is Mapping)).flatMap((it) -> it.toMap().values)
   value = total.toMap().values.filter( (x) -> (x is Mapping)).flatMap((it) -> it.toMap().values)
 }
 
