@@ -9,7 +9,7 @@ import "@k8s/api/core/v1/ServiceAccount.pkl"
 import "@k8s/api/networking/v1/Ingress.pkl"
 
 import "version.pkl"
-import "chart.pkl"
+import "chart.pkl" as InternalChart
 
 selectorLabels {
   ["app.kubernetes.io/name"] = "nginx"
@@ -50,13 +50,13 @@ output {
     }
 
   // Only emit Mappings
-  value = total.toMap().values.filter( (x) -> (x is Mapping)).flatMap((it) -> it.toMap().values)
+  value = chart.toMap().values.filter( (x) -> (x is Mapping)).flatMap((it) -> it.toMap().values)
 }
 
 hidden config: Mixin<Config>
 
 /// The actual configuration value
-total: Config = includes.fold(new Config {
+chart: Config = includes.fold(new Config {
   configMaps = resourceMapping(ConfigMap)
   deployments = resourceMapping(Deployment)
   ingresses = resourceMapping(Ingress)
@@ -73,7 +73,7 @@ class Config {
   serviceaccounts: Mapping<String, ServiceAccount> //= resourceMapping(Deployment)
 }
 
-local includes: Listing<chart> = new {
+local includes: Listing<InternalChart> = new {
   import("service.pkl")
   import("configmap.pkl")
   import("deployment.pkl")

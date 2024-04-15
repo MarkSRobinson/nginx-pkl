@@ -21,7 +21,9 @@ dependencies {
   ["k8s"] {
     uri = "package://pkg.pkl-lang.org/pkl-k8s/k8s@1.0.1"
   }
-  ["chart"] = import("../../nginx-pkl/PklProject")
+  ["chart"] {
+    uri = "package://github.com/MarkSRobinson/nginx-pkl/releases/download/1.0.0/@1.0.0"
+  }
 }
 ```
 
@@ -30,7 +32,7 @@ dependencies {
 ```pkl
 amends "@chart/chart.pkl"
 
-total {
+chart {
   services {
     default {
       metadata {
