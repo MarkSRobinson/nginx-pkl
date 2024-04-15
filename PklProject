@@ -9,6 +9,6 @@ dependencies {
 package {
   version = "1.0.0"
   name = "nginx-pkl"
-  baseUri = "package://example.com/chart"
-  packageZipUrl = "https://example.com/birds@\(version).zip"
+  baseUri = "package://github.com/MarkSRobinson/nginx-pkl/"
+  packageZipUrl = "https://github.com/MarkSRobinson/nginx-pkl/releases/download/\(version)/@\(version).zip"
 }
